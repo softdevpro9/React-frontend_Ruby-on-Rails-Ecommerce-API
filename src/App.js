@@ -1,29 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import Card from 'UI/card'
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import Products from '../src/components/products/Products';
+
+import SimpleCard from '../src/components/products/SimpleCard';
+
+import NavBar from '../src/components/Navigation/NavBar';
+
 
 import './App.css';
 
 function App() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/products.json").then(response => {
-      response.json().then(data => {
-        setProducts(data);
-      });
-    });
-  }, []);
 
   return (
     <div className="App">
-      {products.map(product => (
-        <div key={product.title + product.id}>
-        <h3 >{product.title}</h3>
-        {product.collections.map(col => (
-         <p key={col.title + col.id}>{ col.title} </p>
-        ))}</div>
-      ))
-      }
+      <Container className="root">
+        <NavBar/>
+          <Switch>
+            <Route path="/" exact />
+            <Route path="/products" component={Products}/>
+            {/* <Route path="/product" component={SimpleCard}/> */}
+          </Switch>
+      </Container>
     </div>
   );
 }
