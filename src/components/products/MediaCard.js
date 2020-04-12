@@ -23,7 +23,7 @@ export default function MediaCard(props) {
   const { id, title, description, price, image_url, collections, clicked } = props;
   console.log("media card");console.log(props);console.log("media card");
   return (
-    <Card className={classes.root} defaultValue={id} >
+    <Card className={classes.root} >
       <CardActionArea >
         <CardMedia
           className={classes.media}
@@ -43,7 +43,7 @@ export default function MediaCard(props) {
         <Button size="small" color="primary">
           Share
         </Button>
-        <Button size="small" color="primary" onClick={clicked}>
+        <Button size="small" color="primary">
           Learn More
         </Button>
       </CardActions>
