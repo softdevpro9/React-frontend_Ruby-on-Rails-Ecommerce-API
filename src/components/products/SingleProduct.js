@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -11,24 +10,43 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    maxWidth: 750,
   },
   media: {
-    height: 140,
+    height: 550,
   },
 });
 
 
-export default function MediaCard(props) {
+export default function SingleProduct({ match }) {
   const classes = useStyles();
-  const { id, title, description, price, image_url, collections } = props;
+  const { id } = match.params;
+  const [product, setProduct] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+
   //console.log("media card");console.log(props);console.log("media card");
+  console.log(match);
+  const initProduct = useCallback(() => {
+    fetch(`http://localhost:3000/products/${id}.json`).then(response => {
+      response.json().then(data => {
+        setProduct(data);
+        console.log(data);
+      })
+  })
+  }, []);
+
+  useEffect(() => {
+    initProduct();
+    setLoaded(true);
+ }, [initProduct])
+
+const { title, description, price, image_url, collections } = product;
+
   return (
-    <Card className={classes.root} >
+    // <Card className={classes.root} >
+    <Card >
       <CardActionArea >
-        <Link
-          to={{pathname: `/product/${id}`}}
-          style={{textDecoration: 'none'}} >
         <CardMedia
           className={classes.media}
           image={`http://localhost:3000${image_url}`}
@@ -42,15 +60,10 @@ export default function MediaCard(props) {
             {description}
           </Typography>
         </CardContent>
-        </Link>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-         {/* <Link
-            to={{pathname: `/product/${id}`}}
-            style={{textDecoration: 'none'}} >
-            Learn More
-          </Link> */}
+          Learn More
         </Button>
       </CardActions>
     </Card>
