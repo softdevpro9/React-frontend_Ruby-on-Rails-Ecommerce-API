@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import ProductList from './ProductList';
+import CollectionList from '../collections/CollectionList';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,18 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Products(){
-  const [products, setProducts] = useState([]);
+export default function Collections(){
   const [collections, setCollections] = useState([])
   const [loaded, setLoaded] = useState(false);
 
-  const initProducts = useCallback(() => {
-    fetch("http://localhost:3000/products.json").then(response => {
-      response.json().then(data => {
-        setProducts(data);
-      })
-  })
-  }, []);
 
   const initCollections = useCallback(() => {
     fetch("http://localhost:3000/collections.json").then(response => {
@@ -37,21 +29,19 @@ export default function Products(){
   }, []);
 
   useEffect(() => {
-     initProducts();
      initCollections();
      setLoaded(true);
-  }, [initProducts, initCollections])
+  }, [initCollections])
 
 
-  let showProducts = <p></p>;
+  let showCollections = <p></p>;
   if(loaded){
-      showProducts = <ProductList products={products} />;
+      showCollections = <CollectionList collections={collections} />;
   }
 
   return (
-    <div>
-
-      {showProducts}
-    </div>
+    <React.Fragment>
+      {showCollections}
+    </React.Fragment>
   )
 };

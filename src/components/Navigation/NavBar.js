@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-// import { Link as RouterLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button,
          IconButton, Typography } from '@material-ui/core';
@@ -84,10 +84,10 @@ const NavBar = props => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" >
-          <Button style={{margin:"10px"}} onClick={props.clickedProducts}>
+          <Button style={{margin:"10px"}} >
             <span style={{color:"white"}}>Products</span>
           </Button>
-          <Button className="space" onClick={props.clickedCollections}>
+          <Button className="space" >
             <span style={{color:"white"}}>Collections</span>
           </Button>
           </Typography>

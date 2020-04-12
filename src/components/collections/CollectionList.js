@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
-import MediaCard from './MediaCard';
+import MediaCard from '../products/MediaCard';
 
 const CollectionList = React.memo(props => {
   console.log("coll_list props"); console.log(props); console.log("Coll_list props");
