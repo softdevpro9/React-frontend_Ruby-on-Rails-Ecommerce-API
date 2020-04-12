@@ -1,23 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import ProductList from './ProductList';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: 20,
-  },
-}));
 
 export default function Products(){
   const [products, setProducts] = useState([]);
-  const [collections, setCollections] = useState([])
   const [loaded, setLoaded] = useState(false);
 
   const initProducts = useCallback(() => {
@@ -28,19 +14,11 @@ export default function Products(){
   })
   }, []);
 
-  const initCollections = useCallback(() => {
-    fetch("http://localhost:3000/collections.json").then(response => {
-      response.json().then(data => {
-        setCollections(data);
-      })
-  })
-  }, []);
 
   useEffect(() => {
      initProducts();
-     initCollections();
      setLoaded(true);
-  }, [initProducts, initCollections])
+  }, [initProducts])
 
 
   let showProducts = <p></p>;
@@ -50,7 +28,6 @@ export default function Products(){
 
   return (
     <div>
-
       {showProducts}
     </div>
   )

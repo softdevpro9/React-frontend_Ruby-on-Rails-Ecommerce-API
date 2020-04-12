@@ -1,13 +1,29 @@
 import React, { Fragment } from 'react';
 import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import MediaCard from './MediaCard';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: 20,
+  },
+}));
+
 
 const ProductList = React.memo(props => {
   //console.log("plist props");console.log(props);console.log("plist props");
+  const classes = useStyles();
 
   const allproducts =
     <Fragment>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} className={classes.root}>
         {props.products.map(product => (
           <Grid
             key={product.title + product.id}

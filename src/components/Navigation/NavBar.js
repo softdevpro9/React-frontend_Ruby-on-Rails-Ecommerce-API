@@ -85,10 +85,21 @@ const NavBar = props => {
           </IconButton>
           <Typography variant="h6" >
           <Button style={{margin:"10px"}} >
-            <span style={{color:"white"}}>Products</span>
+            <Link
+              to="/"
+              style={{textDecoration: 'none',
+                      color:"white"}} >
+              Products
+            </Link>
           </Button>
           <Button className="space" >
-            <span style={{color:"white"}}>Collections</span>
+            <Link
+              to="/collections"
+              style={{textDecoration: 'none',
+                      color:"white"}} >
+              Collections
+            </Link>
+
           </Button>
           </Typography>
           <div className={classes.search}>
