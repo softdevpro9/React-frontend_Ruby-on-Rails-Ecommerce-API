@@ -19,14 +19,14 @@ const useStyles = makeStyles({
 
 
 export default function SingleProduct({ match }) {
+  //console.log("SingleProduct");console.log(props);console.log("SingleProduct");
   const classes = useStyles();
   const { id } = match.params;
   const [product, setProduct] = useState({});
   const [loaded, setLoaded] = useState(false);
 
 
-  //console.log("media card");console.log(props);console.log("media card");
-  console.log(match);
+
   const initProduct = useCallback(() => {
     fetch(`http://localhost:3000/products/${id}.json`).then(response => {
       response.json().then(data => {
@@ -55,6 +55,7 @@ const { title, description, price, image_url, collections } = product;
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {title}
+
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {description}
