@@ -1,38 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+//import { makeStyles } from '@material-ui/core/styles';
 import CollectionList from '../collections/CollectionList';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: 20,
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     height: 140,
+//     width: 100,
+//   },
+//   control: {
+//     padding: 20,
+//   },
+// }));
 
-export default function Collections(){
-  const [collections, setCollections] = useState([])
-  const [loaded, setLoaded] = useState(false);
-
-
-  const initCollections = useCallback(() => {
-    fetch("http://localhost:3000/collections.json").then(response => {
-      response.json().then(data => {
-        setCollections(data);
-      })
-  })
-  }, []);
-
-  useEffect(() => {
-     initCollections();
-     setLoaded(true);
-  }, [initCollections])
-
+export default function Collections({ collections }){
+  const [loaded] = useState(true);
 
   let showCollections = <p></p>;
   if(loaded){

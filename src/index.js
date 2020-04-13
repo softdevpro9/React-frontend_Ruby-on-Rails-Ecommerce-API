@@ -5,14 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
-const AppStrict = () => {
-  return (
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>
-  );
-};
+// const AppStrict = () => {
+//   return (
+//     <React.StrictMode>
+//         <App/>
+//     </React.StrictMode>
+//   );
+// };
 
-ReactDOM.render(<AppStrict />, document.getElementById('root') );
+ReactDOM.render(<App />, document.getElementById('root') );
 
 serviceWorker.unregister();

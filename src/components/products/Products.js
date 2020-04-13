@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ProductList from './ProductList';
 import PaginationControl from '../Navigation/PaginationControl';
 
@@ -7,16 +7,19 @@ export default function Products(){
   const [products, setProducts] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [page, setPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(9);
+  const [itemsPerPage] = useState(9);
 
   const initProducts = useCallback(() => {
     fetch("http://localhost:3000/products.json").then(response => {
       response.json().then(data => {
-        console.log(data);
         setProducts(data);
       })
   })
   }, []);
+
+  const searchBarSelectHandler = (event, value) => {
+
+  }
 
   const paginationClickHandler = (event, value) => {
     setPage(value);
@@ -27,8 +30,6 @@ export default function Products(){
      initProducts();
      setLoaded(true);
   }, [initProducts]);
-
-
 
 
   let showP = <p></p>;

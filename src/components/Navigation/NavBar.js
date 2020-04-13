@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button,
          IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchBar from 'material-ui-search-bar';
-
+import SelectList from '../UI/SelectList';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -75,7 +75,8 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = props => {
   //console.log("navigation");console.log(props);console.log("navigation");
   const classes = useStyles();
-
+  const [collections, setCollections] = useState([...props.collections]);
+  const [selectedCollection, setSelectedCollection] = useState('');
 
   return (
     <Fragment>
@@ -102,7 +103,7 @@ const NavBar = props => {
             </Link>
           </Button>
           </Typography>
-            <div className={classes.search}>
+          <div className={classes.search}>
             <SearchBar
               onRequestSearch={()=>{console.log("FOCUSED")}}
               placeholder="Search…"
@@ -112,6 +113,12 @@ const NavBar = props => {
               }}
               inputProps={{ 'aria-label': 'search' }}
             />
+            </div>
+            <div className={classes.search}>
+            <SelectList
+              collections={collections}
+
+              />
           </div>
           <Button color="inherit">Login</Button>
         </Toolbar>
