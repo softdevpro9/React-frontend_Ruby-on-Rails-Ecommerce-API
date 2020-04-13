@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ProductList from './ProductList';
+import PaginationControl from '../Navigation/PaginationControl';
 
 
 export default function Products(){
@@ -29,6 +30,10 @@ export default function Products(){
   return (
     <div>
       {showProducts}
+      <PaginationControl
+        itemCount={products.length}
+
+      />
     </div>
   )
 };
