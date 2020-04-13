@@ -4,9 +4,8 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button,
          IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import SelectTab from './SelectTab';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import SearchBar from 'material-ui-search-bar';
+
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -74,8 +73,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const NavBar = props => {
-  const classes = useStyles();
   //console.log("navigation");console.log(props);console.log("navigation");
+  const classes = useStyles();
+
+
   return (
     <Fragment>
       <AppBar position="static">
@@ -101,19 +102,16 @@ const NavBar = props => {
             </Link>
           </Button>
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-                    onFocus={()=>{console.log("FOCUSED")}}
-                    placeholder="Search…"
-                    classes={{
-                      root: classes.inputRoot,
-                      input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                  />
+            <div className={classes.search}>
+            <SearchBar
+              onRequestSearch={()=>{console.log("FOCUSED")}}
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+            />
           </div>
           <Button color="inherit">Login</Button>
         </Toolbar>
