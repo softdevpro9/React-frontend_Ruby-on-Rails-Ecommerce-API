@@ -99,7 +99,6 @@ const NavBar = props => {
                       color:"white"}} >
               Collections
             </Link>
-
           </Button>
           </Typography>
           <div className={classes.search}>
@@ -107,6 +106,7 @@ const NavBar = props => {
               <SearchIcon />
             </div>
             <InputBase
+                    onFocus={()=>{console.log("FOCUSED")}}
                     placeholder="Search…"
                     classes={{
                       root: classes.inputRoot,

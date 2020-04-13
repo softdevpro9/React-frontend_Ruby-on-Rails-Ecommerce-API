@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useCallback } from 'react';
 import ProductList from './ProductList';
 import PaginationControl from '../Navigation/PaginationControl';
 
@@ -6,34 +6,51 @@ import PaginationControl from '../Navigation/PaginationControl';
 export default function Products(){
   const [products, setProducts] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [page, setPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(9);
 
   const initProducts = useCallback(() => {
     fetch("http://localhost:3000/products.json").then(response => {
       response.json().then(data => {
+        console.log(data);
         setProducts(data);
       })
   })
   }, []);
 
+  const paginationClickHandler = (event, value) => {
+    setPage(value);
+
+  };
 
   useEffect(() => {
      initProducts();
      setLoaded(true);
-  }, [initProducts])
+  }, [initProducts]);
 
 
-  let showProducts = <p></p>;
+
+
+  let showP = <p></p>;
+  let paginator = <p></p>;
   if(loaded){
-      showProducts = <ProductList products={products} />;
+      showP =
+        <ProductList
+          products={products}
+          itemsPerPage={itemsPerPage}
+          page={page}
+        />;
+      paginator =
+      <PaginationControl
+        itemCount={products.length}
+        perPage={itemsPerPage}
+        clicked={paginationClickHandler} />;
   }
 
   return (
     <div>
-      {showProducts}
-      <PaginationControl
-        itemCount={products.length}
-
-      />
+      {showP}
+      {paginator}
     </div>
   )
 };

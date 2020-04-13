@@ -10,11 +10,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PaginationControl({itemCount, perPage = 12, siblingCount = 0, boundaryCount = 2}) {
+export default function PaginationControl({
+  itemCount,
+  perPage = 12,
+  siblingCount = 0,
+  boundaryCount = 2,
+  clicked
+}) {
   const classes = useStyles();
   const remainder = itemCount % perPage;
   let pageCount = (itemCount - remainder) / perPage;
-  if(remainder !== 0){ pageCount++; }
+  if(remainder !== 0){ pageCount = pageCount + 1; }
 
     return (
       <div className={classes.root}>
@@ -24,7 +30,9 @@ export default function PaginationControl({itemCount, perPage = 12, siblingCount
           siblingCount={siblingCount}
           boundaryCount={boundaryCount}
           variant="outlined"
-          shape="rounded" />
+          shape="rounded"
+          onChange={clicked}
+          />
       </div>
     );
   }
