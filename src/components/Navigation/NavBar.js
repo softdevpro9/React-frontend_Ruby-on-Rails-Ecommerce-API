@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button,
          IconButton, Typography } from '@material-ui/core';
@@ -75,7 +76,8 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = props => {
   //console.log("navigation");console.log(props);console.log("navigation");
   const classes = useStyles();
-  const [collections, setCollections] = useState([...props.collections]);
+  const collections = useSelector(state => state.collections.items);;
+  // const [collections, setCollections] = useState([...props.collections]);
   const [selectedCollection, setSelectedCollection] = useState('');
 
   return (

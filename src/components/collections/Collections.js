@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
 import CollectionList from '../collections/CollectionList';
+import { connect } from 'react-redux';
 
 // const useStyles = makeStyles((theme) => ({
 //   root: {
@@ -16,19 +17,15 @@ import CollectionList from '../collections/CollectionList';
 // }));
 
 class Collections extends Component{
-  constructor(props){
-    super(props);
-    this.state = {
 
-    };
-  };
 
   render(){
-
-   let showCollections = <p></p>;
-  // if(loaded){
-  //     showCollections = <CollectionList collections={collections} />;
-  // }
+    const { collections, loading } = this.props;
+    let showCollections = <p></p>;
+    if(!loading){
+      console.log(this.props);
+      showCollections = <CollectionList collections={collections} />;
+    }
     return (
       <React.Fragment>
         {showCollections}
@@ -37,4 +34,12 @@ class Collections extends Component{
   }
 };
 
-export default Collections;
+const mapStateToProps = state => {
+  return {
+    collections: state.collections.items,
+    loading: state.collections.loading,
+    error: state.collections.error
+  }
+};
+
+export default connect(mapStateToProps)(Collections);

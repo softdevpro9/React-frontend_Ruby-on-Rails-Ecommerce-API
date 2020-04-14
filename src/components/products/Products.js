@@ -2,29 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProductList from './ProductList';
 import PaginationControl from '../Navigation/PaginationControl';
-import { fetchProducts } from '../../store/productsActions';
+
+const PER_PAGE=9;
+
 
 class Products extends Component{
-  // constructor(props){
-  //   super(props);
-  // };
-  componentDidMount() {
-    this.props.dispatch(fetchProducts());
-  }
-
-  paginationClickHandler = (event, value) => {
-    //setPage(value);
-  };
-
-  // const searchBarSelectHandler = (event, value) => {
-
-  // }
-
   render(){
-
-
-
-    const { error, loading, products } = this.props;
+    console.log("MMMMMMMMMMMM");console.log(this.props);console.log("MMMMMMMMMMM");
+    const { error, loading, products, pageSelected } = this.props;
 
     let showP = <p></p>;
     let paginator = <p></p>;
@@ -32,14 +17,15 @@ class Products extends Component{
         showP =
           <ProductList
             products={products}
-            //itemsPerPage={itemsPerPage}
-            //page={page}
+            itemsPerPage={PER_PAGE}
+            //pageSelected={pageSelected}
           />;
-        // paginator =
-        // <PaginationControl
-        //   itemCount={products.length}
-        //   perPage={itemsPerPage}
-        //   clicked={paginationClickHandler} />;
+        paginator =
+        <PaginationControl
+          itemCount={products.length}
+          perPage={PER_PAGE}
+          // clicked={paginationClickHandler}
+           />;
     }
 
   return (
@@ -52,6 +38,7 @@ class Products extends Component{
 };
 
 const mapStateToProps = state => ({
+  // pageSelected: state.control.pageSelected,
   products: state.products.items,
   loading: state.products.loading,
   error: state.products.error

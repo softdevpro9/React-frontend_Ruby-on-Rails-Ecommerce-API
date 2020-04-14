@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -20,21 +20,22 @@ const useStyles = makeStyles({
 
 
 export default function SingleProduct(props) {
+  console.log("SingleCollection");console.log(props);console.log("SingleCollection");
   const classes = useStyles();
-
-  const product = useSelector(state => state.singleProduct.singleProduct);
-  console.log("product");console.log(product);console.log("product");
+  const { id } = props.match.params;
+  const collection = useSelector(state => state.collections.items[id]);
+  console.log("collection");console.log(collection);console.log("collection");
 
   let returnVal = <p></p>;
-  if(product.singleProduct !== null){
-    const { title, description, price, image_url, collections } = product;
+  if(collection){
+    const { title, description, products } = collection;
     returnVal = <Card className={classes.root} >
     <CardActionArea >
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
         image={`http://localhost:3000${image_url}`}
         title={title}
-      />
+      /> */}
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {title}

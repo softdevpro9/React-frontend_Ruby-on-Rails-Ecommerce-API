@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -14,13 +15,18 @@ export default function PaginationControl({
   itemCount,
   perPage = 12,
   siblingCount = 0,
-  boundaryCount = 2,
-  clicked
+  boundaryCount = 2
 }) {
   const classes = useStyles();
   const remainder = itemCount % perPage;
   let pageCount = (itemCount - remainder) / perPage;
   if(remainder !== 0){ pageCount = pageCount + 1; }
+
+  const dispatch = useDispatch();
+
+  const handleChange = (event, value) => {
+    dispatch({type: 'SET_PAGINATE_INDEX', value: value});
+  }
 
     return (
       <div className={classes.root}>
@@ -31,7 +37,7 @@ export default function PaginationControl({
           boundaryCount={boundaryCount}
           variant="outlined"
           shape="rounded"
-          onChange={clicked}
+          onChange={handleChange}
           />
       </div>
     );

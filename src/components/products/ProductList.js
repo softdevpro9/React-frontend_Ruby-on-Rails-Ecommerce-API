@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MediaCard from './MediaCard';
@@ -18,19 +19,20 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ProductList = React.memo(props => {
-  console.log("plist props");console.log(props);console.log("plist props");
+  console.log("plist props");console.log(props.pageSelected);console.log("plist props");
   const classes = useStyles();
-  // const { products, page, itemsPerPage } = props;
+  const page = useSelector(state => state.control.pageSelected);
+  const { products, itemsPerPage } = props;
 
-  // const startingIndex = (page -1)*itemsPerPage;
-  // const endingIndex = page*itemsPerPage;
+  const startingIndex = (page -1)*itemsPerPage;
+  const endingIndex = page*itemsPerPage;
 
-  // const showProducts = products.slice(startingIndex, endingIndex);
+  const showProducts = products.slice(startingIndex, endingIndex);
 
   const allproducts =
     <Fragment>
       <Grid container spacing={2} className={classes.root}>
-        {props.products.map(product => (
+        {showProducts.map(product => (
           <Grid
             key={product.title + product.id}
             item xs={4} >
