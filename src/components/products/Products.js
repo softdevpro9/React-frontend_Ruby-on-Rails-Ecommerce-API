@@ -1,52 +1,46 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import ProductList from './ProductList';
 import PaginationControl from '../Navigation/PaginationControl';
+import { fetchProducts } from '../../store/productsActions';
 
-
-export default function Products(){
-  const [products, setProducts] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-  const [page, setPage] = useState(1);
-  const [itemsPerPage] = useState(9);
-
-  const initProducts = useCallback(() => {
-    fetch("http://localhost:3000/products.json").then(response => {
-      response.json().then(data => {
-        setProducts(data);
-      })
-  })
-  }, []);
-
-  const searchBarSelectHandler = (event, value) => {
-
+class Products extends Component{
+  // constructor(props){
+  //   super(props);
+  // };
+  componentDidMount() {
+    this.props.dispatch(fetchProducts());
   }
 
-  const paginationClickHandler = (event, value) => {
-    setPage(value);
-
+  paginationClickHandler = (event, value) => {
+    //setPage(value);
   };
 
-  useEffect(() => {
-     initProducts();
-     setLoaded(true);
-  }, [initProducts]);
+  // const searchBarSelectHandler = (event, value) => {
+
+  // }
+
+  render(){
 
 
-  let showP = <p></p>;
-  let paginator = <p></p>;
-  if(loaded){
-      showP =
-        <ProductList
-          products={products}
-          itemsPerPage={itemsPerPage}
-          page={page}
-        />;
-      paginator =
-      <PaginationControl
-        itemCount={products.length}
-        perPage={itemsPerPage}
-        clicked={paginationClickHandler} />;
-  }
+
+    const { error, loading, products } = this.props;
+
+    let showP = <p></p>;
+    let paginator = <p></p>;
+    if(!loading){
+        showP =
+          <ProductList
+            products={products}
+            //itemsPerPage={itemsPerPage}
+            //page={page}
+          />;
+        // paginator =
+        // <PaginationControl
+        //   itemCount={products.length}
+        //   perPage={itemsPerPage}
+        //   clicked={paginationClickHandler} />;
+    }
 
   return (
     <div>
@@ -54,4 +48,13 @@ export default function Products(){
       {paginator}
     </div>
   )
+  }
 };
+
+const mapStateToProps = state => ({
+  products: state.products.items,
+  loading: state.products.loading,
+  error: state.products.error
+});
+
+export default connect(mapStateToProps)(Products);

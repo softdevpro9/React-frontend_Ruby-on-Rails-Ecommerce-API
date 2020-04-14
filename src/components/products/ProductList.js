@@ -18,19 +18,19 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ProductList = React.memo(props => {
-  //console.log("plist props");console.log(props);console.log("plist props");
+  console.log("plist props");console.log(props);console.log("plist props");
   const classes = useStyles();
-  const { products, page, itemsPerPage } = props;
+  // const { products, page, itemsPerPage } = props;
 
-  const startingIndex = (page -1)*itemsPerPage;
-  const endingIndex = page*itemsPerPage;
+  // const startingIndex = (page -1)*itemsPerPage;
+  // const endingIndex = page*itemsPerPage;
 
-  const showProducts = products.slice(startingIndex, endingIndex);
+  // const showProducts = products.slice(startingIndex, endingIndex);
 
   const allproducts =
     <Fragment>
       <Grid container spacing={2} className={classes.root}>
-        {showProducts.map(product => (
+        {props.products.map(product => (
           <Grid
             key={product.title + product.id}
             item xs={4} >
@@ -46,7 +46,6 @@ const ProductList = React.memo(props => {
         ))}
       </Grid>
     </Fragment>;
-
 
   return (
     <Fragment>

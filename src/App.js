@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, withRouter, Switch, Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Products from './components/products/Products';
@@ -8,49 +8,39 @@ import NavBar from '../src/components/Navigation/NavBar';
 
 import './App.css';
 
-const App = () => {
-  const [collections, setCollections] = useState([]);
-  const [selectedCollection, setSelectedCollection] = useState();
+class App extends Component{
+  constructor(){
+  super();
+  this.state = {
 
-  const initCollections = useCallback(() => {
-    fetch("http://localhost:3000/collections.json").then(response => {
-      response.json().then(data => {
-        setCollections(data);
-      })
-  })
-  }, []);
+  };
+}
+  //   const initCollections = useCallback(() => {
+  //   fetch("http://localhost:3000/collections.json").then(response => {
+  //     response.json().then(data => {
+  //       setCollections(data);
+  //     })
+  // })
+  // }, []);
 
-  useEffect(() => {
-     initCollections();
-  }, [initCollections])
 
-  const Pre = () => {
+    render(){
     return (
+      <BrowserRouter>
       <div className="App">
       <Container maxWidth="lg" className="root">
-        <NavBar
-          collections={collections}
-        />
+        {/* <NavBar /> */}
         <Switch>
           <Route exact path="/" component={Products}/>
-          <Route exact path="/product/:id" component={SingleProduct}/>
-          <Route
-            path="/collections"
-            render={()=> <Collections collections={collections}/> }
-          />
+          {/* <Route exact path="/product/:id" component={SingleProduct}/>
+          <Route path="/collections" component={Collections} /> }
+          /> */}
         </Switch>
       </Container>
       </div>
+      </BrowserRouter>
       );
-    };
-  const AppWithRouter = withRouter(Pre);
-
-  return (
-    <BrowserRouter>
-      <AppWithRouter/>
-    </BrowserRouter>
-  );
+    }
 };
-
 
 export default App;

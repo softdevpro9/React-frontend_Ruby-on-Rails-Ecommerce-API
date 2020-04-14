@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { Component } from 'react';
 //import { makeStyles } from '@material-ui/core/styles';
 import CollectionList from '../collections/CollectionList';
 
@@ -15,17 +15,26 @@ import CollectionList from '../collections/CollectionList';
 //   },
 // }));
 
-export default function Collections({ collections }){
-  const [loaded] = useState(true);
+class Collections extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
 
-  let showCollections = <p></p>;
-  if(loaded){
-      showCollections = <CollectionList collections={collections} />;
+    };
+  };
+
+  render(){
+
+   let showCollections = <p></p>;
+  // if(loaded){
+  //     showCollections = <CollectionList collections={collections} />;
+  // }
+    return (
+      <React.Fragment>
+        {showCollections}
+      </React.Fragment>
+    )
   }
-
-  return (
-    <React.Fragment>
-      {showCollections}
-    </React.Fragment>
-  )
 };
+
+export default Collections;
