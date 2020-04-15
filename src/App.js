@@ -9,6 +9,7 @@ import SingleCollection from './components/collections/SingleCollection';
 import NavBar from '../src/components/Navigation/NavBar';
 import { fetchCollections } from './store/collectionsActions';
 import { fetchProducts } from './store/productsActions';
+import Search from './components/search/Search';
 
 
 import './App.css';
@@ -34,6 +35,7 @@ class App extends Component{
               <Route exact path="/" component={Products}/>
               <Route exact path="/product/:id" component={SingleProduct}/>
               <Route exact path="/collection/:id" component={SingleCollection}/>
+              <Route exact path="/search" component={Search}/>
               <Route path="/collections" component={Collections} />
 
             </Switch>

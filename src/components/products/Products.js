@@ -8,7 +8,7 @@ const PER_PAGE=9;
 
 class Products extends Component{
   render(){
-    console.log("MMMMMMMMMMMM");console.log(this.props);console.log("MMMMMMMMMMM");
+    //console.log("MMMMMMMMMMMM");console.log(this.props);console.log("MMMMMMMMMMM");
     const { error, loading, products, pageSelected } = this.props;
 
     let showP = <p></p>;

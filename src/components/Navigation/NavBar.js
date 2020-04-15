@@ -6,6 +6,7 @@ import { AppBar, Toolbar, Button,
          IconButton, Typography } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchBar from 'material-ui-search-bar';
+import ProductSearchBar from './ProductSearchBar';
 import SelectList from '../UI/SelectList';
 
 const useStyles = makeStyles((theme) => ({
@@ -106,7 +107,7 @@ const NavBar = props => {
           </Button>
           </Typography>
           <div className={classes.search}>
-            <SearchBar
+            {/* <SearchBar
               onRequestSearch={()=>{console.log("FOCUSED")}}
               placeholder="Search…"
               classes={{
@@ -114,13 +115,13 @@ const NavBar = props => {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
-            />
+            /> */}
+            <ProductSearchBar/>
             </div>
             <div className={classes.search}>
             <SelectList
               collections={collections}
-
-              />
+            />
           </div>
           <Button color="inherit">Login</Button>
         </Toolbar>

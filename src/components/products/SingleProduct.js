@@ -22,11 +22,11 @@ const useStyles = makeStyles({
 export default function SingleProduct(props) {
   const classes = useStyles();
 
-  const product = useSelector(state => state.singleProduct.singleProduct);
+  const product = useSelector(state => state.singleInstance.singleProduct);
   console.log("product");console.log(product);console.log("product");
 
   let returnVal = <p></p>;
-  if(product.singleProduct !== null){
+  if(product !== null){
     const { title, description, price, image_url, collections } = product;
     returnVal = <Card className={classes.root} >
     <CardActionArea >

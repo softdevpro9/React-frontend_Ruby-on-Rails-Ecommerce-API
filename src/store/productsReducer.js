@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   items: [],
+  filteredItems: [],
   loading: false,
   finished: false,
   error: null

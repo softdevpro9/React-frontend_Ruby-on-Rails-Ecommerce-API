@@ -1,4 +1,5 @@
 import React, { useState, createRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,16 +19,19 @@ const useStyles = makeStyles((theme) => ({
 
 const SelectList = ({ collections }) => {
   const classes = useStyles();
-  const [collection, setCollection] = useState('');
+  //const [collection, setCollection] = useState('');
   const [open, setOpen] = useState(false)
-
-  const handleChange = (event) => setCollection(event.target.value);
+  const dispatch = useDispatch();
+  const collectionSelected = useSelector(state => state.control.selectListSelected);
+  const handleChange = (event) => {
+    console.log('event.target.value');console.log(event.target.value);console.log('event.target.value');
+    dispatch({type: 'SET_SELECTLIST_INDEX', value: event.target.value});
+  };
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
-  const wrapper = createRef();
 
   return (
-    <FormControl ref={wrapper} className={classes.formControl}>
+    <FormControl className={classes.formControl}>
       <InputLabel id="collection-select-label">Collection</InputLabel>
       <Select
         labelId="collection-select-label"
@@ -35,10 +39,10 @@ const SelectList = ({ collections }) => {
         open={open}
         onClose={handleClose}
         onOpen={handleOpen}
-        value={collection}
+        value={collectionSelected}
         onChange={handleChange}
       >
-        <MenuItem key="none" value=""><em>All</em></MenuItem>
+        <MenuItem key="none" value="0"><em>All</em></MenuItem>
         {collections.map(collection => {
           return (
             <MenuItem
