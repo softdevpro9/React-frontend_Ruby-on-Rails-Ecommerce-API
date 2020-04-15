@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core';
 import CollectionMediaCard from './CollectionMediaCard';
 
 const CollectionList = React.memo(props => {
-  //console.log("coll_list props"); console.log(props); console.log("Coll_list props");
+  console.log("coll_list props"); console.log(props); console.log("Coll_list props");
   let returnVal = <p></p>;
 
   if(props.collections){
@@ -19,6 +19,7 @@ const CollectionList = React.memo(props => {
                 title={collection.title}
                 description={collection.description}
                 products={collection.products}
+                image_url={collection.image_url}
               />
             </Grid>
           ))}

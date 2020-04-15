@@ -1,0 +1,27 @@
+const initialState = {};
+
+export default function shoppingCaretReducer(state = initialState, action) {
+  switch(action.type){
+    case '':
+      return {
+        ...state,
+        pageSelected: action.value
+      }
+    case 'SET_SELECTLIST_INDEX':
+      return {
+        ...state,
+        selectListSelected: action.value
+    }
+    case 'SET_SEARCHBAR_VALUE':
+    return {
+      ...state,
+      searchBarValue: action.value
+    }
+    default:
+      return state;
+  }
+}
+
+export const SET_PAGINATE_INDEX = 'SET_PAGINATE_INDEX';
+export const SET_SELECTLIST_INDEX = 'SET_SELECTLIST_INDEX';
+export const SET_SEARCHBAR_VALUE = 'SET_SEARCHBAR_VALUE';
