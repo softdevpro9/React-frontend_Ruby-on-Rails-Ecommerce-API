@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 //import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import currencyFormat from '../../util/currencyFormat';
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +33,7 @@ export default function MediaCard(props) {
     <Card className={classes.root} >
       <CardActionArea >
         <Link
-          onClick={()=> dispatch({ type: 'SET_SINGLE_PRODUCT', value:{id: id, title:title, description:description, image_url:image_url}})}
+          onClick={()=> dispatch({ type: 'SET_SINGLE_PRODUCT', value:{id: id, title:title, price:price, description:description, image_url:image_url}})}
           to={{pathname: `/product/${id}`}}
           query={{id:id}}
           style={{textDecoration: 'none'}} >
@@ -46,7 +47,7 @@ export default function MediaCard(props) {
             {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {description}
+            {currencyFormat(price)}
           </Typography>
         </CardContent>
         </Link>

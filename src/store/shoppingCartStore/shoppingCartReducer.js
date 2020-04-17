@@ -1,4 +1,4 @@
-// import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT } from './actionTypes';
+import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, INCREMENT_PRODUCT } from './actionTypes';
 
 const initialState = {
   products: []
@@ -14,12 +14,19 @@ export default function(state = initialState, action) {
     case ADD_PRODUCT:
       return {
         ...state,
-        productToAdd: Object.assign({}, action.payload)
+        products : [...state.products]
+      };
+    case INCREMENT_PRODUCT:
+      return {
+        ...state,
+        products :
+          [...state.products,
+            {product: action.payload, quantity: 1}]
       };
     case REMOVE_PRODUCT:
       return {
         ...state,
-        productToRemove: Object.assign({}, action.payload)
+        products : [...state.products.filter(p => p.product.id !== action.payload.id)]
       };
     default:
       return state;

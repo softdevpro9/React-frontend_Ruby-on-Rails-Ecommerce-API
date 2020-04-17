@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import currencyFormat from '../../util/currencyFormat';
 
 const useStyles = makeStyles({
   root: {
@@ -21,12 +22,29 @@ const useStyles = makeStyles({
 
 export default function SingleProduct(props) {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const product = useSelector(state => state.singleInstance.singleProduct);
+  const cartProducts = useSelector(state => state.cart.products);
   console.log("product");console.log(product);console.log("product");
 
+  const addProductHandler = () => {
+    let productAlreadyInCart = false;
+
+    cartProducts.forEach(cp => {
+      if (cp.item.id === product.id) {
+        cp.quantity += 1;
+        productAlreadyInCart = true;
+      }
+    });
+
+    if (!productAlreadyInCart) {
+       cartProducts.push({ item: product, quantity: 1 });
+     }
+     dispatch({type: 'ADD_PRODUCT', payload: cartProducts})
+  };
+
   let returnVal = <p></p>;
-  if(product !== null){
+  if(!!product){
     const { title, description, price, image_url, collections } = product;
     returnVal = <Card className={classes.root} >
     <CardActionArea >
@@ -38,7 +56,9 @@ export default function SingleProduct(props) {
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
           {title}
-
+        </Typography>
+        <Typography gutterBottom variant="h5" component="h2">
+          {currencyFormat(price)}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           {description}
@@ -46,9 +66,12 @@ export default function SingleProduct(props) {
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button size="small" color="primary">
-        Learn More
+      <Button size="small" color="primary" onClick={addProductHandler}>
+        Add to Cart
       </Button>
+      {/* <Button size="small" color="primary" onClick={()=>{dispatch({type:'REMOVE_PRODUCT', payload: product}) }}>
+        Remove from Cart
+      </Button> */}
     </CardActions>
   </Card>;
   }
