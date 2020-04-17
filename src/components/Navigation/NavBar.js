@@ -8,6 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchBar from 'material-ui-search-bar';
 import ProductSearchBar from './ProductSearchBar';
 import SelectList from '../UI/SelectList';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -72,22 +73,28 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-
-
 const NavBar = props => {
   //console.log("navigation");console.log(props);console.log("navigation");
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+
   const classes = useStyles();
   const collections = useSelector(state => state.collections.items);;
-  // const [collections, setCollections] = useState([...props.collections]);
   const [selectedCollection, setSelectedCollection] = useState('');
 
   return (
     <Fragment>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start"  color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
+
           <Typography variant="h6" >
           <Button style={{margin:"10px"}} >
             <Link
@@ -123,7 +130,10 @@ const NavBar = props => {
               collections={collections}
             />
           </div>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" >Login</Button>
+          <Button color="inherit" onClick={props.clicked}>
+            <ShoppingCartIcon htmlColor="white" style={{border:"none"}} />
+          </Button>
         </Toolbar>
     </AppBar>
     </Fragment>

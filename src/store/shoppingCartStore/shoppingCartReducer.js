@@ -1,4 +1,4 @@
-import { LOAD_CART, ADD_PRODUCT, REMOVE_PRODUCT, INCREMENT_PRODUCT } from './actionTypes';
+import { LOAD_CART, INCREMENT_OR_DECREMENT_PRODUCT, REMOVE_PRODUCT } from './actionTypes';
 
 const initialState = {
   products: []
@@ -11,17 +11,11 @@ export default function(state = initialState, action) {
         ...state,
         products: action.payload
       };
-    case ADD_PRODUCT:
+    case INCREMENT_OR_DECREMENT_PRODUCT:
       return {
         ...state,
-        products : [...state.products]
-      };
-    case INCREMENT_PRODUCT:
-      return {
-        ...state,
-        products :
-          [...state.products,
-            {product: action.payload, quantity: 1}]
+        products : action.payload
+
       };
     case REMOVE_PRODUCT:
       return {

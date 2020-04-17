@@ -10,6 +10,7 @@ import NavBar from '../src/components/Navigation/NavBar';
 import { fetchCollections } from './store/collectionsActions';
 import { fetchProducts } from './store/productsActions';
 import Search from './components/search/Search';
+import SideDrawer from './components/shoppingCart/SideDrawer';
 
 
 import './App.css';
@@ -30,7 +31,8 @@ class App extends Component{
       <BrowserRouter>
         <div className="App">
           <Container maxWidth="lg" className="root">
-            <NavBar />
+            {/* <NavBar /> */}
+            <SideDrawer/>
             <Switch>
               <Route exact path="/" component={Products}/>
               <Route exact path="/product/:id" component={SingleProduct}/>

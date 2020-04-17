@@ -9,6 +9,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import currencyFormat from '../../util/currencyFormat';
+import ShoppingButton from '../UI/ShoppingButton';
 
 const useStyles = makeStyles({
   root: {
@@ -25,23 +26,7 @@ export default function SingleProduct(props) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.singleInstance.singleProduct);
   const cartProducts = useSelector(state => state.cart.products);
-  console.log("product");console.log(product);console.log("product");
-
-  const addProductHandler = () => {
-    let productAlreadyInCart = false;
-
-    cartProducts.forEach(cp => {
-      if (cp.item.id === product.id) {
-        cp.quantity += 1;
-        productAlreadyInCart = true;
-      }
-    });
-
-    if (!productAlreadyInCart) {
-       cartProducts.push({ item: product, quantity: 1 });
-     }
-     dispatch({type: 'ADD_PRODUCT', payload: cartProducts})
-  };
+  //console.log("product");console.log(product);console.log("product");
 
   let returnVal = <p></p>;
   if(!!product){
@@ -66,12 +51,8 @@ export default function SingleProduct(props) {
       </CardContent>
     </CardActionArea>
     <CardActions>
-      <Button size="small" color="primary" onClick={addProductHandler}>
-        Add to Cart
-      </Button>
-      {/* <Button size="small" color="primary" onClick={()=>{dispatch({type:'REMOVE_PRODUCT', payload: product}) }}>
-        Remove from Cart
-      </Button> */}
+      <ShoppingButton product={product} text="Add to Cart" />
+      <ShoppingButton product={product} text="Remove from Cart" add={false} />
     </CardActions>
   </Card>;
   }
