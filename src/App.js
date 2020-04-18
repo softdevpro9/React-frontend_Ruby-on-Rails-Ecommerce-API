@@ -6,12 +6,11 @@ import Products from './components/products/Products';
 import Collections from './components/collections/Collections';
 import SingleProduct from './components/products/SingleProduct';
 import SingleCollection from './components/collections/SingleCollection';
-import NavBar from '../src/components/Navigation/NavBar';
 import { fetchCollections } from './store/collectionsActions';
 import { fetchProducts } from './store/productsActions';
 import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
-
+import LoseFocusHandler from './util/LoseFocusHandler';
 
 import './App.css';
 
@@ -25,14 +24,15 @@ class App extends Component{
   }
 
   render(){
-    const { collections} = this.props
+    const { collections } = this.props
 
     return (
       <BrowserRouter>
         <div className="App">
           <Container maxWidth="lg" className="root">
-            {/* <NavBar /> */}
-            <SideDrawer/>
+            <LoseFocusHandler>
+              <SideDrawer/>
+            </LoseFocusHandler>
             <Switch>
               <Route exact path="/" component={Products}/>
               <Route exact path="/product/:id" component={SingleProduct}/>

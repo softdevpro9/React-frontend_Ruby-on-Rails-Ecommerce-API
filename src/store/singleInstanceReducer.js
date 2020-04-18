@@ -1,7 +1,8 @@
 const initialState = {
   singleProduct: null,
   singleCollection: null,
-  searchString: ''
+  searchString: '',
+  sideDrawerOpen: false
 };
 
 export default function singleInstanceReducer(state = initialState, action) {
@@ -21,6 +22,11 @@ export default function singleInstanceReducer(state = initialState, action) {
         ...state,
         searchString: action.value
       };
+    case 'TOGGLE_SIDEDRAWER':
+      return{
+        ...state,
+        sideDrawerOpen: !state.sideDrawerOpen
+      }
     default:
       return state;
   }

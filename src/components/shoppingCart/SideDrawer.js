@@ -18,6 +18,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import NavBar from '../Navigation/NavBar'
+import ShoppingButton from '../UI/ShoppingButton';
 
 const drawerWidth = 480;
 
@@ -81,16 +82,16 @@ const useStyles = makeStyles((theme) => ({
 export default function PersistentDrawerRight() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const open = useSelector(state => state.singleInstance.sideDrawerOpen)
   const dispatch = useDispatch();
   const cartContents = useSelector(state => state.cart.products);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    dispatch({type: 'TOGGLE_SIDEDRAWER'});
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    dispatch({type: 'TOGGLE_SIDEDRAWER'});
   };
 
   return (
@@ -139,18 +140,17 @@ export default function PersistentDrawerRight() {
         <Divider />
         <List>
           {cartContents.map(product => (
-            <li>{product.quantity} x {product.item.title}</li>
+            <React.Fragment>
+            <li>{product.quantity} x {product.item.title}
+              <ShoppingButton product={product.item}/>
+              <ShoppingButton product={product.item} add={false} text='-'/>
+            </li>
+            <Divider/>
+            </React.Fragment>
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+
       </Drawer>
     </div>
   );
