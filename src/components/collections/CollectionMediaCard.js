@@ -31,7 +31,7 @@ export default function CollectionMediaCard(props) {
       <CardActionArea >
         <Link
           onClick={()=> dispatch({type: 'SET_SINGLE_COLLECTION',
-            value: { id:id, title:title, description:description, products:products } }) }
+            value: { id:id, title:title, description:description, image_url:image_url, products:products } }) }
           to={{pathname: `/collection/${id}`}}
           style={{textDecoration: 'none'}} >
         <CardMedia

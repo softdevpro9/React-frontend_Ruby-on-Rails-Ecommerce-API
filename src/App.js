@@ -24,8 +24,6 @@ class App extends Component{
   }
 
   render(){
-    const { collections } = this.props
-
     return (
       <BrowserRouter>
         <div className="App">

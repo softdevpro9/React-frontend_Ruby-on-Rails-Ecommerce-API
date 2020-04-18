@@ -23,10 +23,9 @@ const useStyles = makeStyles({
 
 
 export default function MediaCard(props) {
-  const classes = useStyles();
-  const { id, title, description, price, image_url, collections } = props;
   //console.log("media card");console.log(props);console.log("media card");
-  const x = {id: id, title:title, description:description, image_url:image_url};
+  const classes = useStyles();
+  const { id, title, description, price, image_url } = props;
   const dispatch = useDispatch();
 
   return (

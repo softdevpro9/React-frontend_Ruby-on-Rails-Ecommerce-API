@@ -27,7 +27,7 @@ export default function SingleProduct(props) {
 
   let returnVal = <p></p>;
   if(!!product){
-    const { title, description, price, image_url, collections } = product;
+    const { title, description, price, image_url } = product;
     returnVal = <Card className={classes.root} >
     <CardActionArea >
       <CardMedia

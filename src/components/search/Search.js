@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProductList from '../products/ProductList';
 import PaginationControl from '../Navigation/PaginationControl';
-import createTypography from '@material-ui/core/styles/createTypography';
+//import createTypography from '@material-ui/core/styles/createTypography';
 
 class Search extends Component{
   render(){

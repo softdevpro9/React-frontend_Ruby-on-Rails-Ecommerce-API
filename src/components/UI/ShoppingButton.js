@@ -14,9 +14,7 @@ const ShoppingButton = ({product, add = true, text = '+'}) => {
     if(selectedInList.quantity > 0 && add)
     { disabled = true; }
   }
-  else if(!add){
-    { disabled = true; }
-  }
+  else if(!add){ disabled = true; }
 
   const addProductHandler = () => {
     let productAlreadyInCart = false;

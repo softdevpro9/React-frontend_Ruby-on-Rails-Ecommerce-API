@@ -1,11 +1,8 @@
-import React, { Fragment, useState, useCallback, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Button,
-         IconButton, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchBar from 'material-ui-search-bar';
+import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import ProductSearchBar from './ProductSearchBar';
 import SelectList from '../UI/SelectList';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -75,20 +72,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const NavBar = props => {
   //console.log("navigation");console.log(props);console.log("navigation");
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-
   const classes = useStyles();
   const collections = useSelector(state => state.collections.items);;
-  const [selectedCollection, setSelectedCollection] = useState('');
 
   return (
     <Fragment>

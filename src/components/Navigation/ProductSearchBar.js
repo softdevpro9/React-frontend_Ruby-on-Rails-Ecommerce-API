@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchBar from 'material-ui-search-bar';
-import SearchIcon from '@material-ui/icons/Search';
 
 const ProductSearchBar = props => {
   const [redirect, setRedirect] = useState(false);
