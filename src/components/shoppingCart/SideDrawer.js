@@ -19,6 +19,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import NavBar from '../Navigation/NavBar'
 import ShoppingButton from '../UI/ShoppingButton';
+import QuantityDisplay from '../UI/quantityDisplay/QuantityDisplay';
 
 const drawerWidth = 480;
 
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerRight() {
+export default function SideDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const open = useSelector(state => state.singleInstance.sideDrawerOpen)
@@ -137,13 +138,13 @@ export default function PersistentDrawerRight() {
             {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
         </div>
+        <h1>Shopping Cart</h1>
         <Divider />
         <List>
           {cartContents.map(product => (
-            <React.Fragment>
-            <li>{product.quantity} x {product.item.title}
-              <ShoppingButton product={product.item}/>
-              <ShoppingButton product={product.item} add={false} text='-'/>
+            <React.Fragment key={product.item.id + product.item.title}>
+            <li>
+              <QuantityDisplay product={product.item}/>
             </li>
             <Divider/>
             </React.Fragment>

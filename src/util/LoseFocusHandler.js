@@ -13,7 +13,7 @@ function useLoseFocusHandler(ref) {
      */
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        dispatch({type: 'TOGGLE_SIDEDRAWER'});
+        dispatch({type: 'CLOSE_SIDEDRAWER'});
       }
     }
     // Bind the event listener

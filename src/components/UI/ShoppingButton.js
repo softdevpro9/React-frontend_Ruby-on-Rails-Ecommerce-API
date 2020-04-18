@@ -9,9 +9,13 @@ const ShoppingButton = ({product, add = true, text = '+'}) => {
     p => p.item.id === product.id
   ));
 
-  let disabled = add ? false : true;
+  let disabled = false;
   if(selectedInList) {
-    disabled = false;
+    if(selectedInList.quantity > 0 && add)
+    { disabled = true; }
+  }
+  else if(!add){
+    { disabled = true; }
   }
 
   const addProductHandler = () => {
@@ -33,13 +37,8 @@ const ShoppingButton = ({product, add = true, text = '+'}) => {
   const removeProductHandler = () => {
     cartProducts.forEach(cp => {
       if (cp.item.id === product.id) {
-        if(cp.quantity > 1){
-          cp.quantity -= 1;
-        }
-        else{
           cartProducts = cartProducts.filter(
             p => p.item.id !== product.id);
-        }
       }
     });
     dispatch({type: 'INCREMENT_OR_DECREMENT_PRODUCT', payload: cartProducts});

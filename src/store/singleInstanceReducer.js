@@ -27,6 +27,11 @@ export default function singleInstanceReducer(state = initialState, action) {
         ...state,
         sideDrawerOpen: !state.sideDrawerOpen
       }
+    case 'CLOSE_SIDEDRAWER':
+      return{
+        ...state,
+        sideDrawerOpen: false
+      }
     default:
       return state;
   }
