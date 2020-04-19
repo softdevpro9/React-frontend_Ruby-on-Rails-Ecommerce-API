@@ -8,7 +8,7 @@ class Search extends Component{
   render(){
     const { products, searchString, selectListSelected } = this.props;
     let filteredByTitleAndDescription= [];
-    let displaySearchedProducts = <p></p>;
+    let displaySearchedProducts = <p hidden></p>;
     if(products){
       filteredByTitleAndDescription =
         products.filter(product => product.title

@@ -1,18 +1,4 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import NavBar from '../Navigation/NavBar'
-import QuantityDisplay from '../UI/quantityDisplay/QuantityDisplay';
+//import QuantityDisplay from '../UI/quantityDisplay/QuantityDisplay';
 // import Typography from '@material-ui/core/Typography';
 // import ListItem from '@material-ui/core/ListItem';
 // import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -20,6 +6,21 @@ import QuantityDisplay from '../UI/quantityDisplay/QuantityDisplay';
 // import InboxIcon from '@material-ui/icons/MoveToInbox';
 // import MailIcon from '@material-ui/icons/Mail';
 // import ShoppingButton from '../UI/ShoppingButton';
+// import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Toolbar from '@material-ui/core/Toolbar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import NavBar from '../Navigation/NavBar'
+import ShoppingCartForm from '../shoppingCart/ShoppingCartForm';
 
 const drawerWidth = 480;
 
@@ -85,7 +86,7 @@ export default function SideDrawer() {
   const theme = useTheme();
   const open = useSelector(state => state.singleInstance.sideDrawerOpen)
   const dispatch = useDispatch();
-  const cartContents = useSelector(state => state.cart.products);
+  //const cartContents = useSelector(state => state.cart.products);
 
   const handleDrawerOpen = () => {
     dispatch({type: 'TOGGLE_SIDEDRAWER'});
@@ -140,17 +141,19 @@ export default function SideDrawer() {
         </div>
         <h1>Shopping Cart</h1>
         <Divider />
-        <List>
+        {/* <ShoppingCartForm products={cartContents} /> */}
+        <ShoppingCartForm />
+        {/* <List>
           {cartContents.map(product => (
             <React.Fragment key={product.item.id + product.item.title}>
-            <li>
-              <QuantityDisplay product={product.item}/>
-            </li>
-            <Divider/>
+              <li>
+                <QuantityDisplay product={product.item}/>
+              </li>
+              <Divider/>
             </React.Fragment>
           ))}
         </List>
-        <Divider />
+        <Divider /> */}
       </Drawer>
     </div>
   );

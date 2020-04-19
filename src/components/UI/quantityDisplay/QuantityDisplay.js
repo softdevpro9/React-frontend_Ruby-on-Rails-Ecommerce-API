@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-//import ClearIcon from '@material-ui/icons/Clear';
 import currencyFormat from '../../../util/currencyFormat';
+//import ClearIcon from '@material-ui/icons/Clear';
 
 
 const QuantityDisplay = ({product}) => {

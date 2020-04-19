@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const ProductList = React.memo(props => {
-  console.log("plist props");console.log(props.pageSelected);console.log("plist props");
+  //console.log("plist props");console.log(props.pageSelected);console.log("plist props");
   const classes = useStyles();
   const page = useSelector(state => state.control.pageSelected);
   const { products, itemsPerPage } = props;
