@@ -11,6 +11,7 @@ import { fetchProducts } from './store/productsActions';
 import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
 import LoseFocusHandler from './util/LoseFocusHandler';
+import Layout from './util/Layout';
 
 import './App.css';
 
@@ -25,23 +26,25 @@ class App extends Component{
 
   render(){
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Container maxWidth="lg" className="root">
-            <LoseFocusHandler>
-              <SideDrawer/>
-            </LoseFocusHandler>
-            <Switch>
-              <Route exact path="/" component={Products}/>
-              <Route exact path="/product/:id" component={SingleProduct}/>
-              <Route exact path="/collection/:id" component={SingleCollection}/>
-              <Route exact path="/search" component={Search}/>
-              <Route path="/collections" component={Collections} />
+      <Layout>
+        <BrowserRouter>
+          <div className="App">
+            <Container maxWidth="lg" className="root">
+              <LoseFocusHandler>
+                <SideDrawer/>
+              </LoseFocusHandler>
+              <Switch>
+                <Route exact path="/" component={Products}/>
+                <Route exact path="/product/:id" component={SingleProduct}/>
+                <Route exact path="/collection/:id" component={SingleCollection}/>
+                <Route exact path="/search" component={Search}/>
+                <Route path="/collections" component={Collections} />
 
-            </Switch>
-          </Container>
-        </div>
-      </BrowserRouter>
+              </Switch>
+            </Container>
+          </div>
+        </BrowserRouter>
+      </Layout>
     );
   }
 };
