@@ -39,7 +39,7 @@ const ShoppingCartForm = () => {
   };
 
   let redirect = <p hidden></p>;
-  if(redirecting) { redirect = <Redirect to='/' /> }
+  if(redirecting) { redirect = <Redirect to='/checkout' /> }
 
   return (
     <React.Fragment>

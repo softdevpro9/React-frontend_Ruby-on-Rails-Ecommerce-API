@@ -12,13 +12,10 @@ import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
 import LoseFocusHandler from './util/LoseFocusHandler';
 import Layout from './util/Layout';
-
+import Checkout from './components/checkout/Checkout';
 import './App.css';
 
 class App extends Component{
-  // constructor(){
-  // super();
-  // }
   componentDidMount(){
     this.props.dispatch(fetchCollections());
     this.props.dispatch(fetchProducts());
@@ -39,6 +36,7 @@ class App extends Component{
                 <Route exact path="/collection/:id" component={SingleCollection}/>
                 <Route exact path="/search" component={Search}/>
                 <Route path="/collections" component={Collections} />
+                <Route path="/checkout" component={Checkout} />
 
               </Switch>
             </Container>
