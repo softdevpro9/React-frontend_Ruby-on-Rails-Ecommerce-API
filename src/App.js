@@ -6,12 +6,12 @@ import Products from './components/products/Products';
 import Collections from './components/collections/Collections';
 import SingleProduct from './components/products/SingleProduct';
 import SingleCollection from './components/collections/SingleCollection';
-import { fetchCollections } from './store/collectionsActions';
-import { fetchProducts } from './store/productsActions';
+import { fetchCollections } from './store/collectionsHelpers/collectionsActions';
+import { fetchProducts } from './store/productsHelpers/productsActions';
 import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
 import LoseFocusHandler from './util/LoseFocusHandler';
-import Layout from './util/Layout';
+//import Layout from './util/Layout';
 
 import './App.css';
 
@@ -26,7 +26,7 @@ class App extends Component{
 
   render(){
     return (
-      <Layout>
+      // <Layout>
         <BrowserRouter>
           <div className="App">
             <Container maxWidth="lg" className="root">
@@ -44,7 +44,7 @@ class App extends Component{
             </Container>
           </div>
         </BrowserRouter>
-      </Layout>
+      // </Layout>
     );
   }
 };
