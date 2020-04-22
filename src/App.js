@@ -18,17 +18,21 @@ import { alertActions } from './authSrc/_actions';
 import { PrivateRoute } from './authSrc/_components/PrivateRoute';
 import { LoginPage } from './authSrc/LoginPage'
 import { RegisterPage } from './authSrc/RegisterPage';
-
+import Checkout from './components/checkout/Checkout';
 import './App.css';
+
+
+
 
 class App extends Component{
   constructor(props){
-  super(props);
+    super(props);
 
-    history.listen((location, action) => {
-      this.props.clearAlerts();
-    })
+      history.listen((location, action) => {
+        this.props.clearAlerts();
+      })
   }
+
   componentDidMount(){
     this.props.dispatch(fetchCollections());
     this.props.dispatch(fetchProducts());
@@ -52,6 +56,8 @@ class App extends Component{
                 <Route path="/collections" component={Collections} />
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/register" component={RegisterPage} />
+                <Route path="/checkout" component={Checkout} />
+
               </Switch>
             </Container>
           </div>

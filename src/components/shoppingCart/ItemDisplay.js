@@ -7,7 +7,7 @@ import currencyFormat from '../../util/currencyFormat'
 
 
 const ItemDisplay = ({prod, clickUp, clickDown}) => {
-  console.log(prod);
+  //console.log(prod);
   const [localQuantity, setLocalQuantity] = useState(prod.quantity);
 
   const plusHandler = () => {
