@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 import { customerActions } from '../_actions';
 
@@ -14,15 +15,17 @@ function RegisterPage() {
     });
     const [address, setAddress] = useState({
         line_1: '',
+        line_2: '',
         city: '',
         postal_code: '',
-        province: '',
+        province_id: '',
+        customer_id: ''
     });
 
     const [submitted, setSubmitted] = useState(false);
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
-
+    const provinces = useSelector(state => state.provinces.items);
     // reset login status
     useEffect(() => {
         dispatch(customerActions.logout());
@@ -40,11 +43,18 @@ function RegisterPage() {
     function handleSubmit(e) {
         e.preventDefault();
 
+        let tempAddress = address;
+        tempAddress.customer_id = "17";
+        setAddress(tempAddress);
+
         setSubmitted(true);
         if (customer.first_name && customer.last_name && customer.email && customer.username && customer.password_digest &&
-            address.line_1 && address.postal_code && address.province) {
-            dispatch(customerActions.register(customer));
+            address.line_1 && address.postal_code && address.province_id) {
+            dispatch(customerActions.register(customer, address));
         }
+
+
+        // console.log(address);
     }
 
     return (
@@ -84,6 +94,42 @@ function RegisterPage() {
                     <input type="password" name="password_digest" value={customer.password_digest} onChange={handleChange} className={'form-control' + (submitted && !customer.password_digest ? ' is-invalid' : '')} />
                     {submitted && !customer.password_digest &&
                         <div className="invalid-feedback">Password is required</div>
+                    }
+                </div>
+                <div>Address</div>
+                <div className="form-group">
+                    <label>Line 1</label>
+                    <input type="text" name="line_1" value={address.line_1} onChange={handleAddressFieldChange} className={'form-control' + (submitted && !address.line_1 ? ' is-invalid' : '')} />
+                    {submitted && !address.line_1 &&
+                        <div className="invalid-feedback">Line 1 is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>City</label>
+                    <input type="text" name="city" value={address.city} onChange={handleAddressFieldChange} className={'form-control' + (submitted && !address.city ? ' is-invalid' : '')} />
+                    {submitted && !address.city &&
+                        <div className="invalid-feedback">City is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    {/* <label htmlFor="province_id">Province</label> */}
+                    <select name="province_id" value={address.province_id} onChange={handleAddressFieldChange} className={'form-control' + (submitted && !address.province_id ? ' is-invalid' : '')}>
+                    <option value="">Select Province</option>
+                    { provinces.map(province => {
+                        return(
+                            <option key={province.id} value={province.id}>{province.name}</option>
+                        )
+                    })}
+                    </select>
+                    {submitted && !address.province_id &&
+                        <div className="invalid-feedback">Province is required</div>
+                    }
+                </div>
+                <div className="form-group">
+                    <label>Postal Code</label>
+                    <input type="text" name="postal_code" value={address.postal_code} onChange={handleAddressFieldChange} className={'form-control' + (submitted && !address.postal_code ? ' is-invalid' : '')} />
+                    {submitted && !address.postal_code &&
+                        <div className="invalid-feedback">Postal Code is required</div>
                     }
                 </div>
                 <div className="form-group">

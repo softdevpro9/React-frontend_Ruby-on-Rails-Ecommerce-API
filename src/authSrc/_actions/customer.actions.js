@@ -38,11 +38,11 @@ function logout() {
     return { type: customerConstants.LOGOUT };
 }
 
-function register(customer) {
+function register(customer, address) {
     return dispatch => {
         dispatch(request(customer));
 
-        customerService.register(customer)
+        customerService.register(customer, address)
             .then(
                 customer => {
                     dispatch(success());

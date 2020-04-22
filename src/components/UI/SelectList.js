@@ -24,7 +24,7 @@ const SelectList = ({ collections }) => {
   const dispatch = useDispatch();
   const collectionSelected = useSelector(state => state.control.selectListSelected);
   const handleChange = (event) => {
-    console.log('event.target.value');console.log(event.target.value);console.log('event.target.value');
+    //console.log('event.target.value');console.log(event.target.value);console.log('event.target.value');
     dispatch({type: 'SET_SELECTLIST_INDEX', value: event.target.value});
   };
   const handleClose = () => setOpen(false);

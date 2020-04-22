@@ -8,6 +8,7 @@ import ProductSearchBar from './ProductSearchBar';
 import SelectList from '../UI/SelectList';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { customerActions } from '../../authSrc/_actions';
+import { history } from '../../authSrc/_helpers';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -78,24 +79,13 @@ const NavBar = props => {
   const dispatch = useDispatch();
   const collections = useSelector(state => state.collections.items);
   const loggedInState = useSelector(state => state.authentication.loggedIn);
-  const [redirectToLogin, setRedirectToLogin] = useState(false);
-  let redirectToLoginTag = <p hidden></p>;
 
   const handleLoginClick = () => {
-    loggedInState ? dispatch(customerActions.logout()) : setRedirectToLogin(true);
+    loggedInState ? dispatch(customerActions.logout()) : history.push('/login');
   };
-
-  if(redirectToLogin){
-    redirectToLoginTag = <Redirect to='/login' />
-  }
-
-  useEffect(() => {
-    setRedirectToLogin(false)
-  }, []);
 
   return (
     <Fragment>
-      {redirectToLoginTag}
       <AppBar position="static">
         <Toolbar>
 

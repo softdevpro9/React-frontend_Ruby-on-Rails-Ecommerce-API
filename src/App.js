@@ -8,10 +8,11 @@ import SingleProduct from './components/products/SingleProduct';
 import SingleCollection from './components/collections/SingleCollection';
 import { fetchCollections } from './store/collectionsHelpers/collectionsActions';
 import { fetchProducts } from './store/productsHelpers/productsActions';
+import { fetchProvinces } from './store/provincesHelpers/provincesActions';
 import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
 import LoseFocusHandler from './util/LoseFocusHandler';
-//import Layout from './util/Layout';
+import Layout from './util/Layout';
 import { history } from './authSrc/_helpers';
 import { alertActions } from './authSrc/_actions';
 import { PrivateRoute } from './authSrc/_components/PrivateRoute';
@@ -31,11 +32,12 @@ class App extends Component{
   componentDidMount(){
     this.props.dispatch(fetchCollections());
     this.props.dispatch(fetchProducts());
+    this.props.dispatch(fetchProvinces());
   }
 
   render(){
     return (
-      // <Layout>
+      <Layout>
         <Router history={history}>
           <div className="App">
             <Container maxWidth="lg" className="root">
@@ -54,7 +56,7 @@ class App extends Component{
             </Container>
           </div>
         </Router>
-      // </Layout>
+      </Layout>
     );
   }
 };
