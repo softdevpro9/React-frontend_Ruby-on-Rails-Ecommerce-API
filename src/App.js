@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import { connect } from 'react-redux';
 import Products from './components/products/Products';
@@ -12,13 +12,22 @@ import Search from './components/search/Search';
 import SideDrawer from './components/shoppingCart/SideDrawer';
 import LoseFocusHandler from './util/LoseFocusHandler';
 //import Layout from './util/Layout';
+import { history } from './authSrc/_helpers';
+import { alertActions } from './authSrc/_actions';
+import { PrivateRoute } from './authSrc/_components/PrivateRoute';
+import { LoginPage } from './authSrc/LoginPage'
+import { RegisterPage } from './authSrc/RegisterPage';
 
 import './App.css';
 
 class App extends Component{
-  // constructor(){
-  // super();
-  // }
+  constructor(props){
+  super(props);
+
+    history.listen((location, action) => {
+      this.props.clearAlerts();
+    })
+  }
   componentDidMount(){
     this.props.dispatch(fetchCollections());
     this.props.dispatch(fetchProducts());
@@ -27,32 +36,41 @@ class App extends Component{
   render(){
     return (
       // <Layout>
-        <BrowserRouter>
+        <Router history={history}>
           <div className="App">
             <Container maxWidth="lg" className="root">
               <LoseFocusHandler>
                 <SideDrawer/>
               </LoseFocusHandler>
               <Switch>
-                <Route exact path="/" component={Products}/>
-                <Route exact path="/product/:id" component={SingleProduct}/>
-                <Route exact path="/collection/:id" component={SingleCollection}/>
-                <Route exact path="/search" component={Search}/>
+                <Route exact path="/" component={Products} />
+                <Route exact path="/product/:id" component={SingleProduct} />
+                <Route exact path="/collection/:id" component={SingleCollection} />
+                <Route exact path="/search" component={Search} />
                 <Route path="/collections" component={Collections} />
-
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/register" component={RegisterPage} />
               </Switch>
             </Container>
           </div>
-        </BrowserRouter>
+        </Router>
       // </Layout>
     );
   }
 };
 
+
 const mapStateToProps = state => ({
   products: state.products.items,
   loading: state.products.loading,
-  error: state.products.error
+  error: state.products.error,
+  alert: state.alert
+
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch =>  ({
+  clearAlerts: alertActions.clear,
+  dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

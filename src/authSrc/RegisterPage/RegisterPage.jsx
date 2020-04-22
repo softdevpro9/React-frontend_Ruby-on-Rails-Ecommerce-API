@@ -8,9 +8,17 @@ function RegisterPage() {
     const [customer, setCustomer] = useState({
         first_name: '',
         last_name: '',
+        email: '',
         username: '',
         password_digest: ''
     });
+    const [address, setAddress] = useState({
+        line_1: '',
+        city: '',
+        postal_code: '',
+        province: '',
+    });
+
     const [submitted, setSubmitted] = useState(false);
     const registering = useSelector(state => state.registration.registering);
     const dispatch = useDispatch();
@@ -22,14 +30,19 @@ function RegisterPage() {
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setUser(customer => ({ ...customer, [name]: value }));
+        setCustomer(customer => ({ ...customer, [name]: value }));
+    }
+    function handleAddressFieldChange(e) {
+        const { name, value } = e.target;
+        setAddress(address => ({...address, [name]: value}));
     }
 
     function handleSubmit(e) {
         e.preventDefault();
 
         setSubmitted(true);
-        if (customer.first_name && customer.last_name && customer.username && customer.password) {
+        if (customer.first_name && customer.last_name && customer.email && customer.username && customer.password_digest &&
+            address.line_1 && address.postal_code && address.province) {
             dispatch(customerActions.register(customer));
         }
     }
@@ -53,6 +66,13 @@ function RegisterPage() {
                     }
                 </div>
                 <div className="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" value={customer.email} onChange={handleChange} className={'form-control' + (submitted && !customer.email ? ' is-invalid' : '')} />
+                    {submitted && !customer.email &&
+                        <div className="invalid-feedback">Email is required</div>
+                    }
+                </div>
+                <div className="form-group">
                     <label>Username</label>
                     <input type="text" name="username" value={customer.username} onChange={handleChange} className={'form-control' + (submitted && !customer.username ? ' is-invalid' : '')} />
                     {submitted && !customer.username &&
@@ -61,8 +81,8 @@ function RegisterPage() {
                 </div>
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" value={customer.password} onChange={handleChange} className={'form-control' + (submitted && !customer.password ? ' is-invalid' : '')} />
-                    {submitted && !customer.password &&
+                    <input type="password" name="password_digest" value={customer.password_digest} onChange={handleChange} className={'form-control' + (submitted && !customer.password_digest ? ' is-invalid' : '')} />
+                    {submitted && !customer.password_digest &&
                         <div className="invalid-feedback">Password is required</div>
                     }
                 </div>

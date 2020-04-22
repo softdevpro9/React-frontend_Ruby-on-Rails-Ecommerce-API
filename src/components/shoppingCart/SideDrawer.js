@@ -141,19 +141,7 @@ export default function SideDrawer() {
         </div>
         <h1>Shopping Cart</h1>
         <Divider />
-        {/* <ShoppingCartForm products={cartContents} /> */}
         <ShoppingCartForm />
-        {/* <List>
-          {cartContents.map(product => (
-            <React.Fragment key={product.item.id + product.item.title}>
-              <li>
-                <QuantityDisplay product={product.item}/>
-              </li>
-              <Divider/>
-            </React.Fragment>
-          ))}
-        </List>
-        <Divider /> */}
       </Drawer>
     </div>
   );

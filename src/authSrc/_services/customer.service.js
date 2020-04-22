@@ -1,4 +1,4 @@
-import config from 'config';
+//import config from 'config';
 import { authHeader } from '../_helpers';
 
 export const customerService = {
@@ -10,6 +10,8 @@ export const customerService = {
     update,
     delete: _delete
 };
+
+const config = { apiUrl: 'http://localhost:3000' };
 
 function login(username, password_digest) {
     const requestOptions = {
@@ -58,7 +60,7 @@ function register(customer) {
         body: JSON.stringify(customer)
     };
 
-    return fetch(`${config.apiUrl}/customers/register`, requestOptions).then(handleResponse);
+    return fetch(`${config.apiUrl}/customers.json`, requestOptions).then(handleResponse);
 }
 
 function update(customer) {
@@ -88,7 +90,7 @@ function handleResponse(response) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
                 logout();
-                location.reload(true);
+                window.location.reload(true);
             }
 
             const error = (data && data.message) || response.statusText;

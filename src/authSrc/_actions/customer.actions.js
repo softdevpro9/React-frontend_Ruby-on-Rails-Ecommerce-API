@@ -7,7 +7,7 @@ export const customerActions = {
     login,
     logout,
     register,
-    getAll,
+    //getAll,
     delete: _delete
 };
 
@@ -61,21 +61,21 @@ function register(customer) {
     function failure(error) { return { type: customerConstants.REGISTER_FAILURE, error } }
 }
 
-function getAll() {
-    return dispatch => {
-        dispatch(request());
+// function getAll() {
+//     return dispatch => {
+//         dispatch(request());
 
-        customerService.getAll()
-            .then(
-                customers => dispatch(success(customers)),
-                error => dispatch(failure(error.toString()))
-            );
-    };
+//         customerService.getAll()
+//             .then(
+//                 customers => dispatch(success(customers)),
+//                 error => dispatch(failure(error.toString()))
+//             );
+//     };
 
-    function request() { return { type: customerConstants.GETALL_REQUEST } }
-    function success(customers) { return { type: customerConstants.GETALL_SUCCESS, customers } }
-    function failure(error) { return { type: customerConstants.GETALL_FAILURE, error } }
-}
+//     function request() { return { type: customerConstants.GETALL_REQUEST } }
+//     function success(customers) { return { type: customerConstants.GETALL_SUCCESS, customers } }
+//     function failure(error) { return { type: customerConstants.GETALL_FAILURE, error } }
+// }
 
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {

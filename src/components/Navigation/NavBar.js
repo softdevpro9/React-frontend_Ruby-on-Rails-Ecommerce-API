@@ -1,11 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 import ProductSearchBar from './ProductSearchBar';
 import SelectList from '../UI/SelectList';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { customerActions } from '../../authSrc/_actions';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -73,10 +75,27 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = props => {
   //console.log("navigation");console.log(props);console.log("navigation");
   const classes = useStyles();
-  const collections = useSelector(state => state.collections.items);;
+  const dispatch = useDispatch();
+  const collections = useSelector(state => state.collections.items);
+  const loggedInState = useSelector(state => state.authentication.loggedIn);
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  let redirectToLoginTag = <p hidden></p>;
+
+  const handleLoginClick = () => {
+    loggedInState ? dispatch(customerActions.logout()) : setRedirectToLogin(true);
+  };
+
+  if(redirectToLogin){
+    redirectToLoginTag = <Redirect to='/login' />
+  }
+
+  useEffect(() => {
+    setRedirectToLogin(false)
+  }, []);
 
   return (
     <Fragment>
+      {redirectToLoginTag}
       <AppBar position="static">
         <Toolbar>
 
@@ -115,7 +134,7 @@ const NavBar = props => {
               collections={collections}
             />
           </div>
-          <Button color="inherit" >Login</Button>
+          <Button color="inherit" onClick={handleLoginClick} >{loggedInState ? 'Logout' : 'Login'  } </Button>
           <Button color="inherit" onClick={props.clicked}>
             <ShoppingCartIcon htmlColor="white" style={{border:"none"}} />
           </Button>
