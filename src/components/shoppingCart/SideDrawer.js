@@ -22,6 +22,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import NavBar from '../Navigation/NavBar'
 import ShoppingCartForm from '../shoppingCart/ShoppingCartForm';
 
+
 const drawerWidth = 480;
 
 const useStyles = makeStyles((theme) => ({

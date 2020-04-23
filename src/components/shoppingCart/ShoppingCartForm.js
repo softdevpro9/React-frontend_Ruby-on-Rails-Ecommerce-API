@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router';
 import ItemDisplay from './ItemDisplay';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import { history } from '../../authSrc/_helpers';
 
+
+const handleCheckoutClick = () => {
+  history.push('/checkout');
+}
 
 const ShoppingCartForm = () => {
   const dispatch = useDispatch();
   let cartProducts = useSelector(state => state.cart.products);
-  const [redirecting, setRedirecting] = useState(false)
 
   const addProductHandler = (product) => {
     for (let i=0; i< cartProducts.length; i++) {
@@ -38,9 +41,6 @@ const ShoppingCartForm = () => {
     dispatch({type: 'INCREMENT_OR_DECREMENT_PRODUCT', payload: cartProducts});
   };
 
-  let redirect = <p hidden></p>;
-  if(redirecting) { redirect = <Redirect to='/checkout' /> }
-
   return (
     <React.Fragment>
       <List>
@@ -58,10 +58,9 @@ const ShoppingCartForm = () => {
         ))}
       </List>
       <Divider />
-      <Button onClick={()=> {setRedirecting(true)}}>
+      <Button onClick={handleCheckoutClick}>
         Proceed to Checkout
       </Button>
-      {redirect}
     </React.Fragment>
   );
 };
